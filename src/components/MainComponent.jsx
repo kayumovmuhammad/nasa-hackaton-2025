@@ -3,6 +3,10 @@ import React, { useEffect, useRef, useState } from "react";
 import formatDateTime from "../api/formatDateTime";
 import { Backdrop } from "@mui/material";
 import GoogleMaps from "./MapsComponent";
+import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
 
 export default function MainComponent() {
     const [datetime, setDatetime] = useState(formatDateTime(new Date()));
@@ -35,12 +39,12 @@ export default function MainComponent() {
                             <span>{locationTitle}</span>
                         </div>
                     </div>
-                    <div className="w-full">
+                    <div className="w-full overflow-hidden bg-white/20 hover:bg-white/40 border border-white/30 rounded-xl">
                         <input
                             value={datetime}
                             onChange={handleDatetimeChange}
                             type="datetime-local"
-                            className="w-full bg-white/20 hover:bg-white/40 border border-white/30 rounded-xl px-4 py-4 text-white placeholder-blue-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-all duration-200 hover:cursor-pointer md:text-lg"
+                            className="w-full   px-4 py-4 text-white placeholder-blue-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-all duration-200 hover:cursor-pointer md:text-lg"
                         />
                     </div>
                     <button className="flex items-center justify-center gap-1 text-white text-2xl border border-white/30 rounded-xl bg-red-500/70 hover:bg-red-500/90 p-3 w-full hover:cursor-pointer">
