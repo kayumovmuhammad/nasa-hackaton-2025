@@ -1,5 +1,5 @@
 import { Home, Mail, Menu, User } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function NavLink({ Icon, title, link = "" }) {
     return (
@@ -15,10 +15,30 @@ function NavLink({ Icon, title, link = "" }) {
     );
 }
 
+function NavItem({ className = "" }) {
+    return (
+        <nav>
+            <ul
+                className={
+                    "menu-items flex fixed top-[55px] z-10000000 left-0 w-full flex-col px-4 bg-gray-800 md:gap-7 md:flex-row md:w-auto md:bg-inherit md:relative md:top-0 md:left-0" +
+                    " " +
+                    className
+                }
+            >
+                <NavLink Icon={<Home />} title={"Home"} link=""></NavLink>
+                <NavLink Icon={<User />} title={"About"} link=""></NavLink>
+                <NavLink Icon={<Mail />} title={"Contact"} link=""></NavLink>
+            </ul>
+        </nav>
+    );
+}
+
 export default function HeaderComponent() {
     const [isMenuOpen, setMenuOpen] = useState(false);
-    console.log(document.documentElement.clientWidth);
-    
+
+    useEffect(() => {
+        console.log(document.documentElement.clientWidth);
+    }, [document.documentElement.clientWidth]);
 
     return (
         <header className="flex items-center justify-between pl-7 pr-7 pt-2 pb-2 bg-gray-800 text-white fixed top-0 left-0 w-full">
@@ -35,27 +55,8 @@ export default function HeaderComponent() {
                 >
                     <Menu></Menu>
                 </div>
-                {(isMenuOpen || document.documentElement.clientWidth >= 768) && (
-                    <nav>
-                        <ul className="menu-items flex fixed top-[55px] z-10000000 left-0 w-full flex-col px-4 bg-gray-800 md:gap-7 md:flex-row md:w-auto md:bg-inherit md:relative md:top-0 md:left-0">
-                            <NavLink
-                                Icon={<Home />}
-                                title={"Home"}
-                                link=""
-                            ></NavLink>
-                            <NavLink
-                                Icon={<User />}
-                                title={"About"}
-                                link=""
-                            ></NavLink>
-                            <NavLink
-                                Icon={<Mail />}
-                                title={"Contact"}
-                                link=""
-                            ></NavLink>
-                        </ul>
-                    </nav>
-                )}
+                <NavItem className="hidden md:flex"></NavItem>
+                {isMenuOpen && <NavItem className="md:hidden"></NavItem>}
             </div>
         </header>
     );

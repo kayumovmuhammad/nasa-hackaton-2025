@@ -54,9 +54,12 @@ export default function MainComponent() {
                     color: "#fff",
                     zIndex: theme.zIndex.drawer + 1,
                 })}
+                onClick={() => {
+                    console.log("hello");
+                }}
                 open={selectOpen}
             >
-                <div className="items-center border rounded p-3 bg-gray-900">
+                <div className="h-full w-full items-center border rounded p-3 bg-gray-900 md:h-[80%] md:w-[80%]">
                     <GoogleMaps
                         setSelectOpen={setSelectOpen}
                         setLocation={setLocation}

@@ -65,7 +65,6 @@ export default function GoogleMaps({
                 <Map
                     colorScheme="DARK"
                     mapId={"269bcd1f5ba584f8"}
-                    style={{ width: "100vw", height: "100vh" }}
                     defaultZoom={12}
                     defaultCenter={mapCenter}
                     gestureHandling={"greedy"}
