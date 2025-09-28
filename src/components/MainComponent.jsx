@@ -16,25 +16,22 @@ export default function MainComponent() {
 
     return (
         <>
-            <main className="bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 min-h-screen pt-24 flex flex-col items-center">
-                <h1 className="text-white text-5xl font-bold">
+            <main className="p-3 bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 min-h-screen pt-24 flex flex-col items-center">
+                <h1 className="text-white text-3xl font-bold md:text-5xl">
                     Weather Forecast
                 </h1>
-                <p className="mt-10 mb-8 text-indigo-200">
+                <p className="mt-5 mb-3 text-indigo-200">
                     Enter location and time
                 </p>
-                <form
-                    style={{ width: "60%" }}
-                    className="flex flex-col items-center gap-3 w-110 bg-white/10 backdrop-blur-md rounded-2xl p-8 shadow-2xl border border-white/20"
-                >
-                    <div className="w-full bg-white/20 hover:bg-white/40 border border-white/30 rounded-xl px-4 py-4 text-white placeholder-blue-200 text-lg focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-all duration-200 hover:cursor-pointer">
-                        <div
-                            onClick={() => {
-                                setSelectOpen(true);
-                            }}
-                            className="flex"
-                        >
-                            <MapPin className="mr-2" />
+                <form className="main-form w-full md:w-[70%] flex flex-col items-center gap-3 bg-white/10 backdrop-blur-md rounded-2xl p-8 shadow-2xl border border-white/20">
+                    <div
+                        onClick={() => {
+                            setSelectOpen(true);
+                        }}
+                        className="w-full bg-white/20 hover:bg-white/40 border border-white/30 rounded-xl px-4 py-4 text-white placeholder-blue-200 text-sm md:text-lg focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-all duration-200 hover:cursor-pointer"
+                    >
+                        <div className="flex">
+                            <MapPin size={20} className="mr-2 pinIcon" />
                             <span>{locationTitle}</span>
                         </div>
                     </div>
@@ -43,7 +40,7 @@ export default function MainComponent() {
                             value={datetime}
                             onChange={handleDatetimeChange}
                             type="datetime-local"
-                            className="w-full bg-white/20 hover:bg-white/40 border border-white/30 rounded-xl px-4 py-4 text-white placeholder-blue-200 text-lg focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-all duration-200 hover:cursor-pointer"
+                            className="w-full bg-white/20 hover:bg-white/40 border border-white/30 rounded-xl px-4 py-4 text-white placeholder-blue-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-all duration-200 hover:cursor-pointer md:text-lg"
                         />
                     </div>
                     <button className="flex items-center justify-center gap-1 text-white text-2xl border border-white/30 rounded-xl bg-red-500/70 hover:bg-red-500/90 p-3 w-full hover:cursor-pointer">

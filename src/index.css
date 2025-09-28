@@ -18,3 +18,30 @@
 .pac-container.pac-logo.hdpi {
     z-index: 1300;
 }
+
+.gmnoprint.gm-style-mtc-bbw {
+    display: none;
+}
+.gm-fullscreen-control {
+    display: none;
+}
+
+@keyframes appear {
+  from {
+    transform: translateX(100%);
+  }
+}
+
+.menu-items {
+    animation: appear ease-in-out .5s;
+}
+.main-form {
+    backdrop-filter: none;
+}
+
+@media screen and (min-width: 768px) {
+    .pinIcon {
+        height: 24px;
+        width: 24px;
+    }
+}

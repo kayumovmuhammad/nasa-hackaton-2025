@@ -9,7 +9,7 @@ import {
     useMapsLibrary,
     useAdvancedMarkerRef,
 } from "@vis.gl/react-google-maps";
-import { Navigation } from "lucide-react";
+import { Navigation, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
 export default function GoogleMaps({
@@ -65,7 +65,7 @@ export default function GoogleMaps({
                 <Map
                     colorScheme="DARK"
                     mapId={"269bcd1f5ba584f8"}
-                    style={{ width: "90vw", height: "80vh" }}
+                    style={{ width: "100vw", height: "100vh" }}
                     defaultZoom={12}
                     defaultCenter={mapCenter}
                     gestureHandling={"greedy"}
@@ -73,7 +73,7 @@ export default function GoogleMaps({
                 >
                     <AdvancedMarker ref={markerRef} position={null} />
                 </Map>
-                <MapControl position={ControlPosition.TOP}>
+                <MapControl position={ControlPosition.TOP_LEFT}>
                     <div className="autocomplete-control">
                         <PlaceAutocomplete onPlaceSelect={setSelectedPlace} />
                     </div>
@@ -81,10 +81,20 @@ export default function GoogleMaps({
                 <MapControl position={ControlPosition.RIGHT_BOTTOM}>
                     <GoToHome marker={marker} setCenter={setCenter}></GoToHome>
                 </MapControl>
-                <MapControl position={ControlPosition.BOTTOM}>
+                <MapControl position={ControlPosition.TOP_RIGHT}>
+                    <div
+                        onClick={() => {
+                            setSelectOpen(false);
+                        }}
+                        className="text-gray-400 mt-2.5 bg-neutral-700 mr-2.5 h-10 w-10 flex justify-center items-center rounded-full hover:text-gray-50 hover:cursor-pointer"
+                    >
+                        <X></X>
+                    </div>
+                </MapControl>
+                <MapControl position={ControlPosition.BOTTOM_CENTER}>
                     <button
                         onClick={handleSelectButton}
-                        className="flex items-center justify-center gap-1 text-white text-xl shadow rounded-sm bg-red-500 hover:bg-red-400 px-3 py-1.5 mb-2.5 hover:cursor-pointer"
+                        className="h-[40px] text-white text-xl shadow rounded-[2px] bg-red-500 hover:bg-red-400 px-3 mb-6 hover:cursor-pointer"
                     >
                         Select
                     </button>
@@ -98,19 +108,13 @@ export default function GoogleMaps({
             <Snackbar
                 anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
                 open={snackOpen}
-                onClose={() => {
-                    // setSnackOpen(false);
-                }}
                 message={snackMsg}
-                key="hello"
-                // key={vertical + horizontal}
             />
         </>
     );
 }
 
 function GoToHome({ marker, setCenter }) {
-    const map = useMap();
     return (
         <div
             onClick={() => {
