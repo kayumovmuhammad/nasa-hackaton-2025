@@ -45,9 +45,8 @@ export default function GoogleMaps({
             );
             return;
         }
-        console.log(marker.position);
-        const lat = marker.position.WC;
-        const lng = marker.position.XC;
+        const lat = marker.position.lat;
+        const lng = marker.position.lng;
         setLocation({
             lat,
             lng,
