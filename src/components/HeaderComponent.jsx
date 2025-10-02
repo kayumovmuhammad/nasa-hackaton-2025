@@ -41,7 +41,7 @@ export default function HeaderComponent() {
     }, [document.documentElement.clientWidth]);
 
     return (
-        <header className="flex glass items-center justify-between pl-7 pr-7 pt-2 pb-2 text-white fixed top-0 left-0 w-full">
+        <header className="flex backdrop-blur-2xl glass items-center justify-between pl-7 pr-7 pt-2 pb-2 text-white fixed top-0 left-0 w-full">
             <div className="flex items-center">
                 <img src="/favicon.png" height={50} width={50} alt="" />
                 <h2>Nasa Space Apps</h2>

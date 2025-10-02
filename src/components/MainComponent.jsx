@@ -153,7 +153,7 @@ export default function MainComponent() {
                 <p className="mt-5 mb-3 text-indigo-200">
                     Enter location and time
                 </p>
-                <form className="glass w-full md:w-[70%] flex flex-col items-center gap-3 rounded-2xl p-8 border border-white/20">
+                <form className="glass backdrop-blur-2xl w-full md:w-[70%] flex flex-col items-center gap-3 rounded-2xl p-8 border border-white/20">
                     <div
                         onClick={() => {
                             setSelectOpen(true);
@@ -182,7 +182,7 @@ export default function MainComponent() {
                     {possibilities.map((item, index) => (
                         <div
                             key={index}
-                            className="hover:cursor-pointer flex flex-col items-center gap-3 glass rounded-2xl p-8 border border-white/20"
+                            className="hover:cursor-pointer flex flex-col items-center gap-3 glass backdrop-blur-2xl rounded-2xl p-8 border border-white/20"
                         >
                             <h3 className="text-white text-2xl text-center">
                                 {item.title}
