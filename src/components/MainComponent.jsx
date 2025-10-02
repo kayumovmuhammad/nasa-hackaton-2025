@@ -146,14 +146,14 @@ export default function MainComponent() {
 
     return (
         <>
-            <main className="p-3 bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 min-h-screen pt-24 flex flex-col items-center">
+            <main className="p-3 min-h-screen pt-24 flex flex-col items-center">
                 <h1 className="text-white text-3xl font-bold md:text-5xl">
                     Weather Forecast
                 </h1>
                 <p className="mt-5 mb-3 text-indigo-200">
                     Enter location and time
                 </p>
-                <form className="backdrop-minus w-full md:w-[70%] flex flex-col items-center gap-3 bg-white/10 backdrop-blur-md rounded-2xl p-8 shadow-2xl border border-white/20">
+                <form className="glass w-full md:w-[70%] flex flex-col items-center gap-3 rounded-2xl p-8 border border-white/20">
                     <div
                         onClick={() => {
                             setSelectOpen(true);
@@ -179,8 +179,11 @@ export default function MainComponent() {
                     </button>
                 </form>
                 <div className="w-full md:w-[70%] grid [grid-template-columns:repeat(auto-fill,minmax(350px,1fr))] gap-5 mt-7 ">
-                    {possibilities.map((item) => (
-                        <div className="hover:cursor-pointer backdrop-minus flex flex-col items-center gap-3 bg-white/10 backdrop-blur-md rounded-2xl p-8 shadow-2xl border border-white/20">
+                    {possibilities.map((item, index) => (
+                        <div
+                            key={index}
+                            className="hover:cursor-pointer flex flex-col items-center gap-3 glass rounded-2xl p-8 border border-white/20"
+                        >
                             <h3 className="text-white text-2xl text-center">
                                 {item.title}
                             </h3>
