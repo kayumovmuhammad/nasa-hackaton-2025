@@ -6,6 +6,10 @@
     box-sizing: border-box;
 }
 
+header {
+    z-index: 10000000;
+}
+
 .glass {
     background: rgba(255, 255, 255, 0.1);
     border-radius: 16px;
@@ -27,15 +31,15 @@
 }
 
 @keyframes appear {
-  from {
-    transform: translateX(100%);
-  }
+    from {
+        transform: translateX(100%);
+    }
 }
 
 .menu-items {
-    animation: appear ease-in-out .5s;
+    animation: appear ease-in-out 0.5s;
 }
-.main-form {
+.backdrop-minus {
     backdrop-filter: none;
 }
 
