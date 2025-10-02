@@ -1,7 +1,7 @@
 import { MapPin, Search } from "lucide-react";
 import React, { useEffect, useRef, useState } from "react";
 import formatDateTime from "../api/formatDateTime";
-import { Backdrop } from "@mui/material";
+import { Backdrop, ClickAwayListener } from "@mui/material";
 import GoogleMaps from "./MapsComponent";
 import { PieChart } from "@mui/x-charts";
 
@@ -153,7 +153,7 @@ export default function MainComponent() {
                 <p className="mt-5 mb-3 text-indigo-200">
                     Enter location and time
                 </p>
-                <form className="glass backdrop-blur-2xl w-full md:w-[70%] flex flex-col items-center gap-3 rounded-2xl p-8 border border-white/20">
+                <form className="glass backdrop-blur-xs w-full md:w-[70%] flex flex-col items-center gap-3 rounded-2xl p-8 border border-white/20">
                     <div
                         onClick={() => {
                             setSelectOpen(true);
@@ -170,7 +170,7 @@ export default function MainComponent() {
                             value={datetime}
                             onChange={handleDatetimeChange}
                             type="datetime-local"
-                            className="w-full   px-4 py-4 text-white placeholder-blue-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-all duration-200 hover:cursor-pointer md:text-lg"
+                            className="w-full px-4 py-4 text-white placeholder-blue-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-all duration-200 hover:cursor-pointer md:text-lg"
                         />
                     </div>
                     <button className="flex items-center justify-center gap-1 text-white text-2xl border border-white/30 rounded-xl bg-red-500/70 hover:bg-red-500/90 p-3 w-full hover:cursor-pointer">
@@ -184,7 +184,7 @@ export default function MainComponent() {
                             key={index}
                             className="hover:cursor-pointer flex flex-col items-center gap-3 glass backdrop-blur-2xl rounded-2xl p-8 border border-white/20"
                         >
-                            <h3 className="text-white text-2xl text-center">
+                            <h3 className="text-white text-xs text-center">
                                 {item.title}
                             </h3>
                             <CircularProgress
@@ -199,9 +199,6 @@ export default function MainComponent() {
                     color: "#fff",
                     zIndex: theme.zIndex.drawer + 1,
                 })}
-                onClick={() => {
-                    console.log("hello");
-                }}
                 open={selectOpen}
             >
                 <div className="h-full w-full items-center border rounded p-3 bg-gray-900 md:h-[80%] md:w-[80%]">
