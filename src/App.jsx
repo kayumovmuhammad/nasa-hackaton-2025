@@ -1,34 +1,43 @@
-import {
-    Search,
-    Sun,
-    Wind,
-    Eye,
-    Cloud,
-    Home,
-    HelpCircle,
-    Mail,
-    User,
-} from "lucide-react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import HeaderComponent from "./components/HeaderComponent";
 import MainComponent from "./components/MainComponent";
-import Particles from "./bits_components/Particles";
-
+import LoginPage from "./components/auth/LoginComponent";
+import SignUpPage from "./components/auth/RegisterComponent";
+import ProfilePage from "./pages/ProfilePage";
 const WeatherForecastApp = () => {
     return (
-        <>
-            <HeaderComponent />
-            <MainComponent />
-            <Particles
-                className={"background"}
-                particleColors={["#ffffff", "#ffffff"]}
-                particleCount={200}
-                particleSpread={10}
-                speed={0.1}
-                particleBaseSize={100}
-                alphaParticles={false}
-                disableRotation={true}
-            />
-        </>
+        <BrowserRouter>
+            <Routes>
+                <Route
+                    path="/"
+                    element={
+                        <>
+                            <HeaderComponent />
+                            <MainComponent />
+                        </>
+                    }
+                />
+                <Route
+                    path="/profile"
+                    element={
+                        <>
+                            <HeaderComponent />
+                            <ProfilePage></ProfilePage>
+                        </>
+                    }
+                />
+                <Route path="/login" element={<LoginPage></LoginPage>} />
+                <Route path="/register" element={<SignUpPage></SignUpPage>} />
+                <Route
+                    path="*"
+                    element={
+                        <h1 className="text-center text-white text-5xl mt-3">
+                            404 Not Found
+                        </h1>
+                    }
+                ></Route>
+            </Routes>
+        </BrowserRouter>
     );
 };
 

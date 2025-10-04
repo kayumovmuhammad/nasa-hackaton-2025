@@ -5,13 +5,9 @@
     font-family: "Roboto" !important;
     box-sizing: border-box;
 }
-
-header {
-    z-index: 10000000;
-}
-
 .glass {
-    background: rgba(255, 255, 255, 0.1) !important;
+    /* background: rgba(255, 255, 255, 0.1) !important; */
+    background: rgb(30, 30, 30, 0.95) !important;
 }
 
 .pac-container.pac-logo.hdpi {
@@ -49,12 +45,11 @@ header {
 }
 
 main {
-    /* background: #293939; */
     background-repeat: no-repeat;
     background-size: 100% 100%;
 }
 body {
-    background-color: #101012;
+    background-color: #1b1c1d;
 }
 .background {
     position: fixed !important;
@@ -62,5 +57,56 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: -10000000; 
+    z-index: -10000000;
+}
+
+.container {
+    margin: 0 auto;
+    padding: 0 5px;
+}
+
+.max-width-card {
+    max-width: 480px;
+}
+.max-width-card {
+    max-width: 480px;
+}
+
+.signup-link {
+    position: relative;
+}
+
+.signup-link::after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -2px;
+    left: 0;
+    background: linear-gradient(to right, #4a90e2, #7b61ff);
+    transition: width 0.3s ease;
+}
+
+.signup-link:hover::after {
+    width: 100%;
+}
+
+@media (max-width: 640px) {
+    .max-width-card {
+        max-width: 95%;
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.animate-fadeInUp {
+    animation: fadeInUp 0.6s ease-out;
 }

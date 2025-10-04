@@ -11,8 +11,10 @@ import {
 } from "@vis.gl/react-google-maps";
 import { Navigation, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
+const apiKey = import.meta.env.VITE_GOOGLE_API_KEY;
 
 export default function GoogleMaps({
+    setLocationLoading,
     setLocation,
     setLocationTitle,
     setSelectOpen,
@@ -47,18 +49,29 @@ export default function GoogleMaps({
         }
         const lat = marker.position.lat;
         const lng = marker.position.lng;
-        setLocation({
+        const latLng = {
             lat,
             lng,
-        });
-        setLocationTitle(`${lat}, ${lng}`);
+        };
+        setLocation(latLng);
+        setLocationLoading(true);
+        fetch(
+            `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json`
+        )
+            .then((resp) => resp.json())
+            .then((data) => {
+                setLocationTitle(data.display_name);
+                setLocationLoading(false);
+            });
+
+        // setLocationTitle(`${lat}, ${lng}`);
         setSelectOpen(false);
     };
 
     return (
         <>
             <APIProvider
-                apiKey={"AIzaSyBc7SDNLRG2LUovFmkb4oHydZORUOiwDNk"}
+                apiKey={apiKey}
                 solutionChannel="GMP_devsite_samples_v3_rgmautocomplete"
             >
                 <Map

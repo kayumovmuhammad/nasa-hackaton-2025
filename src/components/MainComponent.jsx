@@ -1,11 +1,11 @@
 import { MapPin, Search } from "lucide-react";
 import React, { useEffect, useRef, useState } from "react";
 import formatDateTime from "../api/formatDateTime";
-import { Backdrop, ClickAwayListener } from "@mui/material";
+import { Backdrop, CircularProgress, ClickAwayListener } from "@mui/material";
 import GoogleMaps from "./MapsComponent";
 import { PieChart } from "@mui/x-charts";
 
-function CircularProgress({ percent = 0, size = 200, strokeWidth = 20 }) {
+function MyCircularProgress({ percent = 0, size = 200, strokeWidth = 20 }) {
     const getColor = (value) => {
         if (value <= 25) {
             const ratio = value / 25;
@@ -119,6 +119,7 @@ export default function MainComponent() {
     const [selectedLocation, setLocation] = useState();
     const [locationTitle, setLocationTitle] = useState("Pick Your Location");
     const [selectOpen, setSelectOpen] = useState(false);
+    const [isLocationLoading, setLocationLoading] = useState(false);
 
     /* Mock data */
     const possibilities = [
@@ -146,52 +147,63 @@ export default function MainComponent() {
 
     return (
         <>
-            <main className="p-3 min-h-screen pt-24 flex flex-col items-center">
-                <h1 className="text-white text-3xl font-bold md:text-5xl">
-                    Weather Forecast
-                </h1>
-                <p className="mt-5 mb-3 text-indigo-200">
-                    Enter location and time
-                </p>
-                <form className="glass backdrop-blur-xs w-full md:w-[70%] flex flex-col items-center gap-3 rounded-2xl p-8 border border-white/20">
-                    <div
-                        onClick={() => {
-                            setSelectOpen(true);
-                        }}
-                        className="w-full bg-white/20 hover:bg-white/40 border border-white/30 rounded-xl px-4 py-4 text-white placeholder-blue-200 text-sm md:text-lg focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-all duration-200 hover:cursor-pointer"
-                    >
-                        <div className="flex">
-                            <MapPin size={20} className="mr-2 pinIcon" />
-                            <span>{locationTitle}</span>
-                        </div>
-                    </div>
-                    <div className="w-full overflow-hidden bg-white/20 hover:bg-white/40 border border-white/30 rounded-xl">
-                        <input
-                            value={datetime}
-                            onChange={handleDatetimeChange}
-                            type="datetime-local"
-                            className="w-full px-4 py-4 text-white placeholder-blue-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-all duration-200 hover:cursor-pointer md:text-lg"
-                        />
-                    </div>
-                    <button className="flex items-center justify-center gap-1 text-white text-2xl border border-white/30 rounded-xl bg-red-500/70 hover:bg-red-500/90 p-3 w-full hover:cursor-pointer">
-                        <Search></Search>
-                        <span>Search</span>
-                    </button>
-                </form>
-                <div className="w-full md:w-[70%] grid [grid-template-columns:repeat(auto-fill,minmax(350px,1fr))] gap-5 mt-7 ">
-                    {possibilities.map((item, index) => (
+            <main className="min-h-screen pt-24">
+                <div className="container flex flex-col items-center">
+                    <h1 className="text-white text-3xl font-bold md:text-5xl">
+                        Weather Forecast
+                    </h1>
+                    <form className="mt-5 animate-fadeInUp bg-[#282a2c] w-full flex flex-col items-center gap-3 rounded p-8 border border-white/20">
+                        <p className="w-full md:text-2xl text-white">
+                            Enter Location and Time:
+                        </p>
                         <div
-                            key={index}
-                            className="hover:cursor-pointer flex flex-col items-center gap-3 glass backdrop-blur-2xl rounded-2xl p-8 border border-white/20"
+                            onClick={() => {
+                                setSelectOpen(true);
+                            }}
+                            className="border border-white/30 rounded w-full bg-[#3d3f42] hover:bg-[#4a4c4f] px-4 py-4 text-white placeholder-blue-200 text-sm md:text-lg focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-all duration-200 hover:cursor-pointer"
                         >
-                            <h3 className="text-white text-xs text-center">
-                                {item.title}
-                            </h3>
-                            <CircularProgress
-                                percent={item.percentage}
-                            ></CircularProgress>
+                            <div className="flex">
+                                <MapPin size={20} className="mr-2 pinIcon" />
+                                <span>
+                                    {isLocationLoading ? (
+                                        <CircularProgress
+                                            size={20}
+                                            color="inherit"
+                                        ></CircularProgress>
+                                    ) : (
+                                        locationTitle
+                                    )}
+                                </span>
+                            </div>
                         </div>
-                    ))}
+                        <div className="w-full overflow-hidden bg-[#3d3f42] hover:bg-[#4a4c4f] border border-white/30 rounded">
+                            <input
+                                value={datetime}
+                                onChange={handleDatetimeChange}
+                                type="datetime-local"
+                                className="w-full px-4 py-4 text-white placeholder-blue-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-all duration-200 hover:cursor-pointer md:text-lg"
+                            />
+                        </div>
+                        <button className="flex items-center justify-center gap-1 text-white text-2xl rounded bg-red-500/70 hover:bg-red-500/90 p-3 w-full hover:cursor-pointer">
+                            <Search></Search>
+                            <span>Search</span>
+                        </button>
+                    </form>
+                    <div className="w-full grid [grid-template-columns:repeat(auto-fill,minmax(350px,1fr))] gap-5 mt-7 ">
+                        {possibilities.map((item, index) => (
+                            <div
+                                key={index}
+                                className="animate-fadeInUp hover:cursor-pointer flex flex-col items-center gap-3 bg-[#282a2c] rounded p-8 border border-white/20"
+                            >
+                                <h3 className="text-white text-2xl font-bold text-center">
+                                    {item.title}
+                                </h3>
+                                <MyCircularProgress
+                                    percent={item.percentage}
+                                ></MyCircularProgress>
+                            </div>
+                        ))}
+                    </div>
                 </div>
             </main>
             <Backdrop
@@ -199,10 +211,17 @@ export default function MainComponent() {
                     color: "#fff",
                     zIndex: theme.zIndex.drawer + 1,
                 })}
+                onClick={() => {
+                    setSelectOpen(false);
+                }}
                 open={selectOpen}
             >
-                <div className="h-full w-full items-center border rounded p-3 bg-gray-900 md:h-[80%] md:w-[80%]">
+                <div
+                    onClick={(event) => event.stopPropagation()}
+                    className="h-full w-full items-center rounded p-2 bg-gray-900 md:h-[80%] md:w-[80%]"
+                >
                     <GoogleMaps
+                        setLocationLoading={setLocationLoading}
                         setSelectOpen={setSelectOpen}
                         setLocation={setLocation}
                         setLocationTitle={setLocationTitle}
