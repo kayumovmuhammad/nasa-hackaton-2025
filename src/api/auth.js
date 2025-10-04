@@ -23,7 +23,7 @@ export default function login({ mail, password, navigate, setError, setIsLoading
 
       localStorage.setItem('auth', data['status']);
       localStorage.setItem('email', mail);
-      navigate('/categories/plastic');
+      navigate('/');
       setIsLoading(false);
     })
     .catch((err) => {

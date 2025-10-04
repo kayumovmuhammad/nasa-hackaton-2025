@@ -145,6 +145,26 @@ export default function MainComponent() {
         setDatetime(event.target.value.split("T").join(" "));
     };
 
+    const savePrediction = () => {
+        const email = localStorage.getItem("email");
+        const weather = possibilities[0].title;
+        const precent = possibilities[0].percentage;
+
+        fetch(`http://${import.meta.env.VITE_HOSTIP}:8080/predictions/create`, {
+            method: "post",
+            body: JSON.stringify({
+                User_email: email,
+                Title: locationTitle,
+                Description: "",
+                Date: datetime,
+                Weather: weather,
+                Precent: precent,
+            }),
+        }).then((resp) => {
+            return resp.json();
+        });
+    };
+
     return (
         <>
             <main className="min-h-screen pt-24">
@@ -189,6 +209,17 @@ export default function MainComponent() {
                             <span>Search</span>
                         </button>
                     </form>
+                    <div className="flex gap-3 items-center mt-7 justify-end w-full">
+                        <button className="flex items-center justify-center gap-1 text-white text-xl rounded bg-red-500/70 hover:bg-red-500/90 p-3 hover:cursor-pointer">
+                            Add to profile
+                        </button>
+                        <button
+                            onClick={savePrediction}
+                            className="flex items-center justify-center gap-1 text-white text-xl rounded bg-red-500/70 hover:bg-red-500/90 p-3 hover:cursor-pointer"
+                        >
+                            Save as CSV
+                        </button>
+                    </div>
                     <div className="w-full grid [grid-template-columns:repeat(auto-fill,minmax(350px,1fr))] gap-5 mt-7 ">
                         {possibilities.map((item, index) => (
                             <div

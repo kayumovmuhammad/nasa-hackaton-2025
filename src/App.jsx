@@ -4,6 +4,8 @@ import MainComponent from "./components/MainComponent";
 import LoginPage from "./components/auth/LoginComponent";
 import SignUpPage from "./components/auth/RegisterComponent";
 import ProfilePage from "./pages/ProfilePage";
+import Particles from "./bits_components/Particles";
+
 const WeatherForecastApp = () => {
     return (
         <BrowserRouter>
